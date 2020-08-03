@@ -18,7 +18,7 @@
     "http-digest-client": "0.0.3",
     "image-to-base64": "^2.0.1",
     "jsonwebtoken": "^8.4.0",
-    "mongoose": "^5.3.14",
+    "mongoose": "^5.7.5",
     "mongoose-paginate": "^5.0.3",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
