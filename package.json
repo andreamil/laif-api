@@ -1,0 +1,35 @@
+{
+  "name": "larm-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "dependencies": {
+    "async-result": "^1.0.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "event-loop-inspector": "^1.2.2",
+    "express": "^4.16.4",
+    "http-digest-client": "0.0.3",
+    "image-to-base64": "^2.0.1",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.3.14",
+    "mongoose-paginate": "^5.0.3",
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "request": "^2.88.0",
+    "request-digest": "^1.0.13",
+    "serialport": "^7.1.4",
+    "serve-index": "^1.9.1",
+    "socket.io": "^2.2.0",
+    "validator": "^10.9.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
