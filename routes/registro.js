@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const { auth_middleware, permitir } = require('../middleware');
 require('../model/Registro');
 var Registro = mongoose.model('Registro');
+var Usuario = mongoose.model('Usuario');
 
 
 
@@ -192,11 +193,21 @@ router.get('/relatorio/porta/agora', auth_middleware, (req, res) => {
                 res.json({ success: true, msg: 'Sucesso get registros porta agora', registros });
             }).catch((err) => res.json({ success: false, msg: 'Erro get registros porta agora, ' + err, err: err }));
 });
+function addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
 router.get('/relatorio/porta/hoje', auth_middleware, (req, res) => {
-    Registro.find({ $or: [{ invalido: null }, { invalido: false }],$or:[{horaEntrada: {$gte: new Date(new Date().setHours(-24))}},{horaSaida: {$gte: new Date(new Date().setHours(-24))}},{horaSaida: {$exists: false}}]}, { usuario: 1, horaEntrada: 1, horaSaida: 1 })
-        .populate('usuario', { password: 0 }).then(
+    const dataRange = {start:   req.query._dataLimiteStart  ?new Date(parseInt(req.query._dataLimiteStart))  :addDays(new Date(),-30),
+                       end:     req.query._dataLimiteEnd    ?new Date(parseInt(req.query._dataLimiteEnd))    :new Date()}
+    Registro.find({ $or: [{ invalido: null }, { invalido: false }],horaEntrada: {$gte: dataRange.start,$lte:dataRange.end}}, { usuario: 1, horaEntrada: 1, horaSaida: 1 })
+        .then(
             (registros) => {
-                res.json({ success: true, msg: 'Sucesso get registros porta agora', registros:registros.filter((i)=>i.usuario) });
+                const usuarios = [...new Set(registros.map(r => r.usuario))];
+                Usuario.find({_id:{$in:usuarios}}).then((us)=>{
+                    res.json({ success: true, msg: 'Sucesso get registros porta agora', registros:registros.filter((i)=>i.usuario),usuarios:us});
+                })
             }).catch((err) => res.json({ success: false, msg: 'Erro get registros porta agora, ' + err, err: err }));
 });
 

@@ -23,7 +23,7 @@ const { auth_middleware, permitir } = require('../middleware');
         O Objetivo desta routa é criar novos usuários
         Ela recebe três parâmetros: Nome, senha e email, se um deles for nulo a API Vai retornar um json com um mensagem de erro
     */
-    router.post('/register', auth_middleware, permitir('admin','professor'), (req, res) => {
+    router.post('/register'/*, auth_middleware, permitir('admin','professor')*/, (req, res) => {
         // Server-side Verification
             // Validating E-mail
             // Validando E-mail
@@ -225,7 +225,7 @@ const { auth_middleware, permitir } = require('../middleware');
             if(!req.body.email || req.body.email == null || typeof req.body.email == undefined){
                 return res.json({success: false, msg: config.msgs.invalidEmail});
             }
-
+            
         // Validating password
         // Validando senha
             if(!req.body.password || req.body.password == null || typeof req.body.password == undefined){

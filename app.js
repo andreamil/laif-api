@@ -13,7 +13,7 @@ const projetos = require('./routes/projeto');
 const registro = require('./routes/registro');
 const config = require('./config');
 var morgan = require('morgan');
-var staticRoot = __dirname + '/../larm-web/dist/';
+var staticRoot = __dirname + '/../laif-web/dist/';
 
 const jwt = require('jsonwebtoken');
 var io = require('socket.io')(http);
